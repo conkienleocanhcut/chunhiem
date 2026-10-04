@@ -33,10 +33,10 @@
         </div>
       </div>
       <div id="userBadge" class="hidden flex items-center gap-2">
-        <!-- Đèn trạng thái đồng bộ Realtime -->
-        <div id="syncStatus" class="flex items-center gap-1 text-[11px] bg-white/10 px-2 py-1 rounded-lg">
+        <!-- Chỉ báo Realtime Data -->
+        <div id="syncStatus" class="flex items-center gap-1.5 text-[11px] bg-white/10 px-2 py-1 rounded-lg">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="hidden sm:inline text-indigo-100">Đồng bộ</span>
+          <span class="hidden sm:inline text-indigo-100 font-medium">Realtime</span>
         </div>
         <button onclick="openChangePinModal()" title="Đổi mật khẩu" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold flex items-center gap-1 transition">
           <i class="fa-solid fa-key"></i> <span class="hidden sm:inline">Đổi PIN</span>
@@ -51,44 +51,39 @@
   <!-- Navigation Bar Mobile App-Style -->
   <nav id="mainNav" class="hidden fixed bottom-0 left-0 right-0 md:static md:top-[53px] bg-white border-t md:border-b md:border-t-0 shadow-lg md:shadow-sm z-40">
     <div class="max-w-7xl mx-auto px-2 md:px-4 flex justify-around md:justify-start gap-1 md:gap-2 py-1.5 md:py-2 text-xs font-semibold">
-      <!-- Tab 1: Dành riêng cho Phụ huynh -->
-      <button onclick="switchTab('tab-phuhuynh')" id="btn-tab-phuhuynh" class="tab-btn hidden flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
+      
+      <!-- Tab Tổng quan con: CHỈ PHỤ HUYNH THẤY -->
+      <button onclick="switchTab('tab-phuhuynh')" id="btn-tab-phuhuynh" class="tab-btn flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
         <i class="fa-solid fa-house-user text-base md:text-sm"></i>
         <span>Tổng quan con</span>
       </button>
 
-      <!-- Tab 2: Sổ báo bài chung (Cán bộ & GVCN) -->
-      <button onclick="switchTab('tab-baobai')" id="btn-tab-baobai" class="tab-btn flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
+      <!-- Tab Báo bài cho Cán sự & GVCN -->
+      <button onclick="switchTab('tab-baobai')" id="btn-tab-baobai" class="tab-btn hidden flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
         <i class="fa-solid fa-book-open text-base md:text-sm"></i>
         <span>Sổ báo bài</span>
       </button>
 
-      <!-- Tab 3: Thời khoá biểu -->
+      <!-- Tab Thời khoá biểu -->
       <button onclick="switchTab('tab-tkb')" id="btn-tab-tkb" class="tab-btn flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
         <i class="fa-solid fa-calendar-days text-base md:text-sm"></i>
         <span>Thời khoá biểu</span>
       </button>
 
-      <!-- Tab 4: Thi đua cả lớp -->
+      <!-- Tab Thi đua cả lớp -->
       <button onclick="switchTab('tab-nendep')" id="btn-tab-nendep" class="tab-btn flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
         <i class="fa-solid fa-ranking-star text-base md:text-sm"></i>
         <span>Thi đua cả lớp</span>
       </button>
 
-      <!-- Tab 5: Nhắn tin cho GVCN (Dành riêng cho Phụ huynh) -->
-      <button onclick="switchTab('tab-tinnhan')" id="btn-tab-tinnhan" class="tab-btn hidden flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
+      <!-- Tab Tin nhắn: CHỈ PHỤ HUYNH VÀ GVCN THẤY -->
+      <button onclick="switchTab('tab-tinnhan')" id="btn-tab-tinnhan" class="tab-btn relative flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
         <i class="fa-solid fa-comments text-base md:text-sm"></i>
-        <span>Nhắn tin GVCN</span>
-      </button>
-
-      <!-- Tab 6: Hộp thư phụ huynh (CHỈ DUY NHẤT GVCN) -->
-      <button onclick="switchTab('tab-hopthugvcn')" id="btn-tab-hopthugvcn" class="tab-btn hidden relative flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
-        <i class="fa-solid fa-inbox text-base md:text-sm"></i>
-        <span>Hộp thư PH</span>
+        <span id="tabTinNhanLabel">Nhắn tin GVCN</span>
         <span id="unreadBadge" class="hidden absolute top-1 right-2 w-2 h-2 rounded-full bg-red-500"></span>
       </button>
 
-      <!-- Tab 7: Cấu hình GVCN (CHỈ DUY NHẤT GVCN) -->
+      <!-- Tab Cấu hình: CHỈ GVCN THẤY -->
       <button onclick="switchTab('tab-cauhinh')" id="btn-tab-cauhinh" class="tab-btn hidden flex-1 md:flex-initial py-2 px-3 rounded-xl flex flex-col md:flex-row items-center justify-center gap-1 text-slate-500 hover:text-indigo-600 transition">
         <i class="fa-solid fa-sliders text-base md:text-sm"></i>
         <span>Cấu hình GVCN</span>
@@ -181,9 +176,10 @@
         </div>
       </div>
 
-      <!-- ================= TAB 1: DÀNH RIÊNG CHO PHỤ HUYNH ================= -->
-      <div id="tab-phuhuynh" class="tab-content hidden space-y-4">
-        <!-- Thống kê nhanh của con -->
+      <!-- ================= TAB 1: THẺ DÀNH RIÊNG CHO PHỤ HUYNH ================= -->
+      <div id="tab-phuhuynh" class="tab-content space-y-4">
+        
+        <!-- THỐNG KÊ NHANH CỦA CON THEO TUẦN HIỆN TẠI -->
         <div class="bg-gradient-to-br from-indigo-700 via-indigo-800 to-slate-900 text-white p-4 md:p-5 rounded-2xl shadow-lg space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
             <div>
@@ -215,7 +211,7 @@
           </div>
         </div>
 
-        <!-- 2 khối: Báo bài còn hạn & Nhật ký nề nếp -->
+        <!-- 2 KHỐI: BÁO BÀI CÒN HẠN & NHẬT KÝ NỀ NẾP CỦA CON -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
             <div class="flex items-center justify-between border-b pb-2">
@@ -240,7 +236,7 @@
           </div>
         </div>
 
-        <!-- Nút liên hệ GVCN -->
+        <!-- NÚT GỬI TIN NHẮN CHO GVCN -->
         <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-lg">
@@ -257,21 +253,21 @@
         </div>
       </div>
 
-      <!-- ================= TAB 2: SỔ BÁO BÀI (DÀNH CHO CÁN BỘ LỚP & GVCN) ================= -->
+      <!-- ================= TAB 2: SỔ BÁO BÀI (DÀNH CHO CÁN SỰ LỚP & GVCN) ================= -->
       <div id="tab-baobai" class="tab-content hidden space-y-4">
         <div class="flex items-center justify-between bg-white p-4 rounded-2xl border shadow-sm">
           <div>
-            <h3 class="font-bold text-slate-800 text-sm md:text-base flex items-center gap-1.5">
-              <i class="fa-solid fa-book-open text-indigo-600"></i> Sổ Báo Bài Hàng Ngày
+            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+              <i class="fa-solid fa-book-bookmark text-indigo-600"></i> Quản Lý Sổ Báo Bài
             </h3>
-            <p class="text-[11px] text-slate-500">Dặn dò bài tập về nhà, chuẩn bị bài và kiểm tra</p>
+            <p class="text-xs text-slate-500">Cập nhật dặn dò bài tập hàng ngày cho cả lớp (Bài quá hạn tự động xóa)</p>
           </div>
-          <button id="btnAddBaobaiTab" onclick="openBaobaiModal()" class="hidden px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow flex items-center gap-1 transition">
+          <button id="btnAddBaobaiTab" onclick="openBaobaiModal()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow flex items-center gap-1.5 transition">
             <i class="fa-solid fa-plus"></i> Đăng báo bài
           </button>
         </div>
 
-        <div id="fullBaobaiContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+        <div id="officerBaobaiContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
       </div>
 
       <!-- ================= TAB 3: THỜI KHOÁ BIỂU (SÁNG & CHIỀU, T2 - T6) ================= -->
@@ -316,6 +312,7 @@
 
       <!-- ================= TAB 4: THI ĐUA NỀ NẾP CẢ LỚP (35 TUẦN) ================= -->
       <div id="tab-nendep" class="tab-content hidden space-y-4">
+        
         <!-- BỘ LỌC TUẦN & TỔ -->
         <div class="bg-white p-3.5 md:p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-2">
@@ -325,11 +322,11 @@
 
           <div class="flex items-center gap-2">
             <select id="filterGroupSelect" onchange="renderScoreboard()" class="p-2 border rounded-xl text-xs font-semibold bg-white">
-              <option value="all">Toàn bộ 4 tổ (47 HS)</option>
-              <option value="Tổ 1">Tổ 1 (12 HS)</option>
-              <option value="Tổ 2">Tổ 2 (12 HS)</option>
-              <option value="Tổ 3">Tổ 3 (11 HS)</option>
-              <option value="Tổ 4">Tổ 4 (12 HS)</option>
+              <option value="all">Toàn bộ 4 tổ</option>
+              <option value="Tổ 1">Tổ 1</option>
+              <option value="Tổ 2">Tổ 2</option>
+              <option value="Tổ 3">Tổ 3</option>
+              <option value="Tổ 4">Tổ 4</option>
             </select>
             <button id="btnOpenRecordModal" onclick="openRecordModal()" class="hidden px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow flex items-center gap-1 transition">
               <i class="fa-solid fa-plus-circle"></i> Chấm điểm
@@ -364,15 +361,17 @@
         </div>
       </div>
 
-      <!-- ================= TAB 5: NHẮN TIN CHO GVCN (DÀNH RIÊNG CHO PHỤ HUYNH) ================= -->
+      <!-- ================= TAB 5: HỘP THƯ TIN NHẮN (CHỈ PHỤ HUYNH VÀ GVCN) ================= -->
       <div id="tab-tinnhan" class="tab-content hidden space-y-4">
-        <div class="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        
+        <!-- 1. GIAO DIỆN PHÍA PHỤ HUYNH -->
+        <div id="parentChatView" class="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="border-b pb-3 flex items-center justify-between">
             <div>
               <h3 class="font-bold text-sm md:text-base text-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-comments text-indigo-600"></i> Hộp Thoại Trao Đổi Với GVCN
               </h3>
-              <p class="text-xs text-slate-500">Giáo viên chủ nhiệm lớp 7A3 sẽ trực tiếp nhận và phản hồi tin nhắn của quý phụ huynh</p>
+              <p class="text-xs text-slate-500">Giáo viên chủ nhiệm lớp 7A3 sẽ nhận và phản hồi tin nhắn của quý phụ huynh</p>
             </div>
             <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
               <i class="fa-solid fa-circle text-[8px] mr-1"></i>Sẵn sàng nhận tin
@@ -388,51 +387,89 @@
                 <i class="fa-solid fa-paper-plane"></i> Gửi
               </button>
             </div>
-            <p class="text-[11px] text-slate-400">Tin nhắn được bảo mật riêng tư, chỉ GVCN có quyền đọc và trả lời.</p>
+            <p class="text-[11px] text-slate-400">Tin nhắn được gửi kèm thông tin con em của quý phụ huynh và thời gian thực.</p>
           </form>
         </div>
-      </div>
 
-      <!-- ================= TAB 6: HỘP THƯ TIN NHẮN PHỤ HUYNH (CHỈ DUY NHẤT GVCN) ================= -->
-      <div id="tab-hopthugvcn" class="tab-content hidden space-y-4">
-        <div class="bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <!-- 2. GIAO DIỆN RIÊNG DÀNH CHO GIÁO VIÊN CHỦ NHIỆM (CÁN BỘ LỚP KHÔNG CÓ QUYỀN) -->
+        <div id="teacherChatView" class="hidden bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="border-b pb-3 flex items-center justify-between">
             <div>
               <h3 class="font-bold text-sm md:text-base text-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-inbox text-indigo-600"></i> Hộp Thư Tin Nhắn Phụ Huynh Lớp 7A3
               </h3>
-              <p class="text-xs text-slate-500">Danh sách ý kiến, đơn xin phép và giải trình từ phụ huynh (chỉ GVCN xem được)</p>
+              <p class="text-xs text-slate-500">Khu vực riêng tư: Chỉ Giáo viên chủ nhiệm mới có quyền đọc và phản hồi</p>
             </div>
             <span id="teacherMsgCount" class="text-xs font-bold bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full border border-indigo-200">0 tin nhắn</span>
           </div>
 
           <div id="teacherMessagesList" class="space-y-3 max-h-[500px] overflow-y-auto custom-scroll"></div>
         </div>
+
       </div>
 
-      <!-- ================= TAB 7: CẤU HÌNH DÀNH RIÊNG CHO GVCN ================= -->
+      <!-- ================= TAB 6: CẤU HÌNH DÀNH RIÊNG CHO GVCN ================= -->
       <div id="tab-cauhinh" class="tab-content hidden space-y-5">
         <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 text-white p-4 rounded-2xl shadow">
           <h3 class="text-base font-bold"><i class="fa-solid fa-crown text-amber-300 mr-2"></i> Bảng Quản Trị Giáo Viên Chủ Nhiệm</h3>
-          <p class="text-xs text-indigo-200 mt-0.5">Quản lý toàn bộ mật khẩu cán bộ lớp, phụ huynh, quy tắc thi đua và đồng bộ đám mây</p>
+          <p class="text-xs text-indigo-200 mt-0.5">Quản lý học sinh, mật khẩu cán bộ lớp, phụ huynh và quy tắc điểm thi đua</p>
         </div>
 
-        <!-- Cấu hình Realtime Firebase -->
+        <!-- Cấu hình Realtime Firebase URL -->
         <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-3">
           <h4 class="font-bold text-xs uppercase text-slate-700 flex items-center gap-1.5 border-b pb-2">
-            <i class="fa-solid fa-cloud text-indigo-600"></i> Cấu Hình Đồng Bộ Realtime (Firebase)
+            <i class="fa-solid fa-cloud text-indigo-600"></i> Cấu Hình Đồng Bộ Realtime (Firebase Database)
           </h4>
           <div class="flex flex-wrap items-center gap-2">
             <input type="text" id="firebaseUrlInput" placeholder="Nhập URL Realtime Database..." class="flex-1 p-2 border rounded-xl text-xs font-mono">
-            <button onclick="saveFirebaseUrl()" class="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow">Lưu URL Realtime</button>
+            <button onclick="saveFirebaseUrl()" class="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow">Lưu URL</button>
             <button onclick="forceSyncWithCloud()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl shadow">
               <i class="fa-solid fa-rotate mr-1"></i> Đồng bộ ngay
             </button>
           </div>
-          <p class="text-[11px] text-slate-400">Mọi thay đổi từ máy tính của giáo viên sẽ lập tức đẩy lên đám mây và đồng bộ sang điện thoại phụ huynh.</p>
+          <p class="text-[11px] text-slate-400">Dữ liệu được phát sóng tự động đa nền tảng sau mỗi thay đổi và tự làm mới định kỳ.</p>
         </div>
 
-        <!-- Quản lý PIN cán sự lớp -->
+        <!-- 1. QUẢN LÝ DANH SÁCH HỌC SINH (THÊM / XOÁ HS) -->
+        <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-2">
+            <div>
+              <h4 class="font-bold text-xs uppercase text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-user-graduate text-indigo-600"></i> Danh Sách Học Sinh Lớp 7A3 (<span id="totalStudentsCount">0</span> học sinh)
+              </h4>
+              <p class="text-[11px] text-slate-400">Thêm học sinh mới hoặc xoá học sinh chuyển trường/chuyển lớp</p>
+            </div>
+            <div class="flex gap-1.5">
+              <button onclick="openAddStudentModal()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow flex items-center gap-1">
+                <i class="fa-solid fa-user-plus"></i> + Thêm học sinh
+              </button>
+              <button onclick="resetAllPinsToDefault()" class="px-2.5 py-1.5 bg-amber-50 border border-amber-300 text-amber-800 text-[11px] font-bold rounded-xl hover:bg-amber-100">
+                Reset PIN cả lớp về 1234
+              </button>
+              <button onclick="exportDataJson()" class="px-2.5 py-1.5 bg-slate-800 text-white text-[11px] font-bold rounded-xl hover:bg-slate-700">
+                <i class="fa-solid fa-download mr-1"></i> Sao lưu JSON
+              </button>
+            </div>
+          </div>
+          
+          <div class="max-h-72 overflow-y-auto custom-scroll border rounded-xl">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-slate-100 font-bold border-b sticky top-0">
+                <tr>
+                  <th class="p-2 w-12 text-center">STT</th>
+                  <th class="p-2">Tổ</th>
+                  <th class="p-2">Mã HS</th>
+                  <th class="p-2">Họ và tên</th>
+                  <th class="p-2 text-center">Mật khẩu</th>
+                  <th class="p-2 text-right">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="studentPinManageTable" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2. Quản lý PIN cán sự lớp -->
         <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-3">
           <h4 class="font-bold text-xs uppercase text-slate-700 flex items-center gap-1.5 border-b pb-2">
             <i class="fa-solid fa-user-shield text-indigo-600"></i> Mật khẩu / Mã PIN Ban Cán Sự Lớp
@@ -451,37 +488,7 @@
           </div>
         </div>
 
-        <!-- Quản lý Mật khẩu phụ huynh 47 HS -->
-        <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-2">
-            <h4 class="font-bold text-xs uppercase text-slate-700 flex items-center gap-1.5">
-              <i class="fa-solid fa-users text-indigo-600"></i> Mật khẩu Phụ huynh (47 học sinh)
-            </h4>
-            <div class="flex gap-1.5">
-              <button onclick="resetAllPinsToDefault()" class="px-2.5 py-1 bg-amber-50 border border-amber-300 text-amber-800 text-[11px] font-bold rounded-lg hover:bg-amber-100">
-                Reset tất cả về 1234
-              </button>
-              <button onclick="exportDataJson()" class="px-2.5 py-1 bg-slate-800 text-white text-[11px] font-bold rounded-lg hover:bg-slate-700">
-                <i class="fa-solid fa-download mr-1"></i> Sao lưu JSON
-              </button>
-            </div>
-          </div>
-          <div class="max-h-64 overflow-y-auto custom-scroll border rounded-xl">
-            <table class="w-full text-xs text-left">
-              <thead class="bg-slate-100 font-bold border-b sticky top-0">
-                <tr>
-                  <th class="p-2">Tổ</th>
-                  <th class="p-2">Họ và tên</th>
-                  <th class="p-2 text-center">Mật khẩu</th>
-                  <th class="p-2 text-right">Đặt lại</th>
-                </tr>
-              </thead>
-              <tbody id="studentPinManageTable" class="divide-y divide-slate-100"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Quản lý mức điểm thi đua -->
+        <!-- 3. Quản lý mức điểm thi đua -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div class="bg-white p-4 rounded-2xl border shadow-sm space-y-3">
             <div class="flex items-center justify-between border-b pb-2">
@@ -505,13 +512,47 @@
     </div>
   </main>
 
+  <!-- MODAL: THÊM HỌC SINH MỚI (CHO GVCN) -->
+  <div id="addStudentModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-3">
+    <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl p-5 space-y-4">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-sm text-slate-800"><i class="fa-solid fa-user-plus text-indigo-600 mr-1.5"></i> Thêm Học Sinh Mới</h3>
+        <button onclick="closeAddStudentModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form onsubmit="submitAddStudent(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-600 mb-1 font-semibold">Họ và tên học sinh:</label>
+          <input type="text" id="newStudentName" required placeholder="Ví dụ: Nguyễn Văn A" class="w-full p-2.5 border rounded-xl text-sm">
+        </div>
+        <div>
+          <label class="block text-slate-600 mb-1 font-semibold">Phân vào tổ:</label>
+          <select id="newStudentGroup" required class="w-full p-2.5 border rounded-xl text-sm bg-white">
+            <option value="Tổ 1">Tổ 1</option>
+            <option value="Tổ 2">Tổ 2</option>
+            <option value="Tổ 3">Tổ 3</option>
+            <option value="Tổ 4">Tổ 4</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-slate-600 mb-1 font-semibold">Mật khẩu ban đầu (mặc định 1234):</label>
+          <input type="password" id="newStudentPin" value="1234" required class="w-full p-2.5 border rounded-xl text-sm">
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeAddStudentModal()" class="px-3.5 py-2 border rounded-xl font-semibold text-slate-600">Hủy</button>
+          <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow">Thêm vào lớp</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- MODAL 1: CẬP NHẬT TKB CHO GVCN -->
   <div id="tkbModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-3">
     <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl p-4 md:p-6 max-h-[95vh] overflow-y-auto custom-scroll space-y-4">
       <div class="flex justify-between items-center border-b pb-2">
         <div>
           <h3 class="font-bold text-sm md:text-base text-slate-800"><i class="fa-solid fa-calendar-check text-indigo-600 mr-1.5"></i> Cập Nhật Thời Khoá Biểu</h3>
-          <p class="text-[11px] text-slate-500">Chọn môn học từ danh mục cho từng tiết học (Thứ 2 đến Thứ 6)</p>
+          <p class="text-[11px] text-slate-500">Chọn phân môn riêng biệt cho từng tiết học (Thứ 2 đến Thứ 6)</p>
         </div>
         <button onclick="closeTkbModal()" class="text-slate-400 hover:text-slate-600 text-lg p-1"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -641,8 +682,24 @@
 
       <form onsubmit="saveBaobai(event)" class="space-y-3 text-xs font-semibold">
         <div>
-          <label class="block text-slate-600 mb-1">Môn học:</label>
-          <input type="text" id="bbSubject" required placeholder="Ví dụ: Toán, Ngữ văn, KHTN..." class="w-full p-2.5 border rounded-xl text-sm font-normal">
+          <label class="block text-slate-600 mb-1">Phân môn:</label>
+          <select id="bbSubject" required class="w-full p-2.5 border rounded-xl text-sm bg-white">
+            <option value="Toán">Toán</option>
+            <option value="Ngữ văn">Ngữ văn</option>
+            <option value="Tiếng Anh">Tiếng Anh</option>
+            <option value="KHTN (Vật lí)">KHTN (Vật lí)</option>
+            <option value="KHTN (Hóa học)">KHTN (Hóa học)</option>
+            <option value="KHTN (Sinh học)">KHTN (Sinh học)</option>
+            <option value="Lịch sử">Lịch sử</option>
+            <option value="Địa lí">Địa lí</option>
+            <option value="GDCD">GDCD</option>
+            <option value="Tin học">Tin học</option>
+            <option value="Công nghệ">Công nghệ</option>
+            <option value="GDTC">GDTC</option>
+            <option value="Âm nhạc">Âm nhạc</option>
+            <option value="Mĩ thuật">Mĩ thuật</option>
+            <option value="HĐTN">HĐTN</option>
+          </select>
         </div>
         <div>
           <label class="block text-slate-600 mb-1">Dặn dò bài tập / Chuẩn bị:</label>
@@ -685,17 +742,16 @@
   <script>
     // =========================================================================
     // 1. CẤU HÌNH REALTIME DATABASE (FIREBASE URL)
-    // Dán link Realtime Database của bạn vào đây để đồng bộ giữa các máy
     // =========================================================================
     let FIREBASE_DB_URL = localStorage.getItem('lop7a3_firebase_url') || "";
 
     // 2. MỐC NĂM HỌC: TUẦN 1 TỪ 07/09/2026 -> TUẦN 5 TỪ 05/10/2026 ĐẾN 10/10/2026 (THỨ 2 - THỨ 7)
-    const SCHOOL_START_DATE = new Date(2026, 8, 7); // Tháng 9 index là 8 (07/09/2026)
+    const SCHOOL_START_DATE = new Date(2026, 8, 7);
 
     const schoolWeeks = [];
     for (let i = 1; i <= 35; i++) {
       const start = new Date(SCHOOL_START_DATE.getTime() + (i - 1) * 7 * 86400000);
-      const end = new Date(start.getTime() + 5 * 86400000); // Thứ 2 đến Thứ 7
+      const end = new Date(start.getTime() + 5 * 86400000);
       const formatDate = d => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
       schoolWeeks.push({
         week: i,
@@ -717,7 +773,7 @@
       return calculatedWeek;
     }
 
-    // 3. DANH SÁCH 47 HỌC SINH TỪ FILE LOP7A3.XLSX
+    // 3. DANH SÁCH 47 HỌC SINH KHỞI TẠO BAN ĐẦU
     const initialRawStudents = [
       // Tổ 1
       { id: "HS101", name: "Trần Hải Đăng", group: "Tổ 1" },
@@ -785,23 +841,26 @@
       totruong4: { id: "totruong4", name: "Tổ trưởng Tổ 4", pin: "1004", role: "totruong", group: "Tổ 4" }
     };
 
+    // 4. DANH MỤC PHÂN MÔN TÁCH BIỆT: KHTN & LỊCH SỬ - ĐỊA LÍ
     const subjectOptions = [
-      "Nghỉ", "Toán", "Ngữ văn", "Tiếng Anh", "KHTN", "Lịch sử & ĐL",
-      "GDCD", "Tin học", "Công nghệ", "GDTC", "Âm nhạc", "Mĩ thuật",
+      "Nghỉ", "Toán", "Ngữ văn", "Tiếng Anh", 
+      "KHTN (Vật lí)", "KHTN (Hóa học)", "KHTN (Sinh học)", 
+      "Lịch sử", "Địa lí", 
+      "GDCD", "Tin học", "Công nghệ", "GDTC", "Âm nhạc", "Mĩ thuật", 
       "HĐTN", "Chào cờ", "Sinh hoạt lớp"
     ];
 
     const initialTkb = {
       morning: [
-        { period: 1, mon: "Chào cờ", tue: "Toán", wed: "Ngữ văn", thu: "KHTN", fri: "Toán" },
-        { period: 2, mon: "Toán", tue: "Toán", wed: "Ngữ văn", thu: "KHTN", fri: "KHTN" },
+        { period: 1, mon: "Chào cờ", tue: "Toán", wed: "Ngữ văn", thu: "KHTN (Vật lí)", fri: "Toán" },
+        { period: 2, mon: "Toán", tue: "Toán", wed: "Ngữ văn", thu: "KHTN (Hóa học)", fri: "KHTN (Sinh học)" },
         { period: 3, mon: "Ngữ văn", tue: "Tiếng Anh", wed: "Tiếng Anh", thu: "GDCD", fri: "Tin học" },
-        { period: 4, mon: "Ngữ văn", tue: "KHTN", wed: "GDTC", thu: "Âm nhạc", fri: "Mĩ thuật" },
-        { period: 5, mon: "HĐTN", tue: "Lịch sử & ĐL", wed: "GDTC", thu: "KHTN", fri: "Sinh hoạt lớp" }
+        { period: 4, mon: "Ngữ văn", tue: "KHTN (Sinh học)", wed: "GDTC", thu: "Âm nhạc", fri: "Mĩ thuật" },
+        { period: 5, mon: "HĐTN", tue: "Lịch sử", wed: "Địa lí", thu: "Công nghệ", fri: "Sinh hoạt lớp" }
       ],
       afternoon: [
         { period: 1, mon: "Nghỉ", tue: "Bồi dưỡng Toán", wed: "Nghỉ", thu: "Bồi dưỡng Anh", fri: "Nghỉ" },
-        { period: 2, mon: "Nghỉ", tue: "Bồi dưỡng Văn", wed: "Nghỉ", thu: "Bồi dưỡng KHTN", fri: "Nghỉ" },
+        { period: 2, mon: "Nghỉ", tue: "Bồi dưỡng Văn", wed: "Nghỉ", thu: "KHTN (Vật lí)", fri: "Nghỉ" },
         { period: 3, mon: "Nghỉ", tue: "Thể thao", wed: "Nghỉ", thu: "Tin học CLB", fri: "Nghỉ" },
         { period: 4, mon: "Nghỉ", tue: "Nghỉ", wed: "Nghỉ", thu: "Nghỉ", fri: "Nghỉ" }
       ]
@@ -824,14 +883,15 @@
       ]
     };
 
+    // BIẾN BỘ NHỚ
     let students = JSON.parse(localStorage.getItem('lop7a3_students')) || initialRawStudents.map(s => ({ ...s, pin: "1234" }));
     let officers = JSON.parse(localStorage.getItem('lop7a3_officers')) || initialOfficers;
     let rules = JSON.parse(localStorage.getItem('lop7a3_rules')) || defaultRules;
     let scores = JSON.parse(localStorage.getItem('lop7a3_scores')) || [];
-    let tkbData = JSON.parse(localStorage.getItem('lop7a3_tkb_v2')) || initialTkb;
+    let tkbData = JSON.parse(localStorage.getItem('lop7a3_tkb_v3')) || initialTkb;
     let baobaiList = JSON.parse(localStorage.getItem('lop7a3_baobai')) || [
       { id: 1, subject: "Toán", content: "Làm bài tập 1, 2, 3 trang 38 SGK", deadline: "2026-10-10", author: "Lớp phó học tập" },
-      { id: 2, subject: "KHTN", content: "Chuẩn bị bài mới: Trao đổi nước ở thực vật", deadline: "2026-10-09", author: "Lớp trưởng" }
+      { id: 2, subject: "KHTN (Sinh học)", content: "Chuẩn bị bài mới: Trao đổi nước ở thực vật", deadline: "2026-10-09", author: "Lớp trưởng" }
     ];
     let messages = JSON.parse(localStorage.getItem('lop7a3_messages')) || [];
 
@@ -851,20 +911,16 @@
       }
     }
 
-    // =========================================================================
-    // LƯU DỮ LIỆU & ĐỒNG BỘ REALTIME ĐÁM MÂY (FIREBASE REST API)
-    // =========================================================================
+    // LƯU CỤC BỘ & ĐẨY REALTIME LÊN ĐÁM MÂY
     async function saveStorage(syncToCloud = true) {
-      // 1. Lưu offline cục bộ
       localStorage.setItem('lop7a3_students', JSON.stringify(students));
       localStorage.setItem('lop7a3_officers', JSON.stringify(officers));
       localStorage.setItem('lop7a3_rules', JSON.stringify(rules));
       localStorage.setItem('lop7a3_scores', JSON.stringify(scores));
       localStorage.setItem('lop7a3_baobai', JSON.stringify(baobaiList));
-      localStorage.setItem('lop7a3_tkb_v2', JSON.stringify(tkbData));
+      localStorage.setItem('lop7a3_tkb_v3', JSON.stringify(tkbData));
       localStorage.setItem('lop7a3_messages', JSON.stringify(messages));
 
-      // 2. Đẩy lên Firebase Realtime Database nếu có cấu hình
       if (syncToCloud && FIREBASE_DB_URL) {
         try {
           const cleanUrl = FIREBASE_DB_URL.replace(/\/$/, "");
@@ -884,12 +940,12 @@
             body: JSON.stringify(payload)
           });
         } catch(err) {
-          console.warn("Không thể đồng bộ với đám mây:", err);
+          console.warn("Không thể đồng bộ Realtime Database:", err);
         }
       }
     }
 
-    // TẢI DỮ LIỆU TỪ ĐÁM MÂY XUỐNG THIẾT BỊ (PULL REALTIME)
+    // TẢI REALTIME TỪ ĐÁM MÂY VỀ MÁY
     async function fetchFromCloud(silent = true) {
       if (!FIREBASE_DB_URL) return;
       try {
@@ -905,9 +961,9 @@
             if (cloudData.baobaiList) baobaiList = cloudData.baobaiList;
             if (cloudData.tkbData) tkbData = cloudData.tkbData;
             if (cloudData.messages) messages = cloudData.messages;
-            saveStorage(false); // Lưu vào local không lặp lại đẩy lên
+            saveStorage(false);
             refreshAllViews();
-            if (!silent) alert("Đã cập nhật dữ liệu mới nhất từ đám mây!");
+            if (!silent) alert("Đã cập nhật dữ liệu Realtime mới nhất!");
           }
         }
       } catch(e) {
@@ -917,9 +973,10 @@
 
     function refreshAllViews() {
       cleanExpiredBaobai();
+      refreshStudentLoginDropdown();
       renderScoreboard();
       renderBaobaiHome();
-      renderFullBaobaiTab();
+      renderBaobaiOfficerTab();
       renderTkb();
       renderMessages();
       if (currentUser && currentUser.type === 'ph') {
@@ -942,18 +999,15 @@
       fetchFromCloud(false);
     }
 
-    // Tự động đồng bộ mỗi 5 giây
+    // Đồng bộ Realtime tự động định kỳ
     setInterval(() => {
       fetchFromCloud(true);
-    }, 5000);
+    }, 4000);
 
-    // =========================================================================
     // KHỞI ĐỘNG HỆ THỐNG
-    // =========================================================================
     window.addEventListener('DOMContentLoaded', () => {
       cleanExpiredBaobai();
 
-      // Điền 35 tuần
       const selectWeek = document.getElementById('selectWeek');
       selectWeek.innerHTML = '';
       schoolWeeks.forEach(w => {
@@ -967,14 +1021,7 @@
       selectWeek.value = selectedWeek;
       updateWeekHeaders();
 
-      // Điền danh sách học sinh đăng nhập
-      const hsSelect = document.getElementById('loginHsSelect');
-      students.forEach(s => {
-        const opt = document.createElement('option');
-        opt.value = s.id;
-        opt.textContent = `${s.name} (${s.group})`;
-        hsSelect.appendChild(opt);
-      });
+      refreshStudentLoginDropdown();
 
       document.getElementById('recordDate').value = new Date().toISOString().split('T')[0];
       document.getElementById('bbDeadline').value = new Date().toISOString().split('T')[0];
@@ -986,6 +1033,17 @@
       renderTkb();
       fetchFromCloud(true);
     });
+
+    function refreshStudentLoginDropdown() {
+      const hsSelect = document.getElementById('loginHsSelect');
+      hsSelect.innerHTML = '<option value="">-- Chọn tên học sinh --</option>';
+      students.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.name} (${s.group})`;
+        hsSelect.appendChild(opt);
+      });
+    }
 
     function updateWeekHeaders() {
       const curW = schoolWeeks.find(w => w.week === selectedWeek) || schoolWeeks[0];
@@ -1068,12 +1126,11 @@
       const btnTabPhuhuynh = document.getElementById('btn-tab-phuhuynh');
       const btnTabBaobai = document.getElementById('btn-tab-baobai');
       const btnTabTinnhan = document.getElementById('btn-tab-tinnhan');
-      const btnTabHopthuGvcn = document.getElementById('btn-tab-hopthugvcn');
       const btnTabCauhinh = document.getElementById('btn-tab-cauhinh');
-
+      const tabTinNhanLabel = document.getElementById('tabTinNhanLabel');
+      
       const btnEditTkb = document.getElementById('btnEditTkb');
       const btnOpenRecord = document.getElementById('btnOpenRecordModal');
-      const btnAddBaobaiTab = document.getElementById('btnAddBaobaiTab');
       const filterGroupSelect = document.getElementById('filterGroupSelect');
 
       if (currentUser.type === 'officer') {
@@ -1082,56 +1139,54 @@
         roleDisplay.textContent = "Ban Cán Sự / Điều Hành Lớp";
         iconDisplay.className = "fa-solid fa-user-shield text-indigo-600";
 
-        // Ẩn tab của phụ huynh
         btnTabPhuhuynh.classList.add('hidden');
-        btnTabTinnhan.classList.add('hidden');
         btnTabBaobai.classList.remove('hidden');
 
         if (off.role === 'gvcn') {
-          // CHỈ GVCN mới có Hộp thư PH và Cấu hình
-          btnTabHopthuGvcn.classList.remove('hidden');
+          btnTabTinnhan.classList.remove('hidden');
+          tabTinNhanLabel.textContent = "Hộp thư GVCN";
+          document.getElementById('parentChatView').classList.add('hidden');
+          document.getElementById('teacherChatView').classList.remove('hidden');
+
           btnTabCauhinh.classList.remove('hidden');
           btnEditTkb.classList.remove('hidden');
           btnOpenRecord.classList.remove('hidden');
-          btnAddBaobaiTab.classList.remove('hidden');
           filterGroupSelect.disabled = false;
-        } else if (off.role === 'loptruong' || off.role === 'loppho') {
-          btnTabHopthuGvcn.classList.add('hidden');
-          btnTabCauhinh.classList.add('hidden');
-          btnEditTkb.classList.remove('hidden');
-          btnOpenRecord.classList.remove('hidden');
-          btnAddBaobaiTab.classList.remove('hidden');
-          filterGroupSelect.disabled = false;
-        } else if (off.role === 'totruong') {
-          btnTabHopthuGvcn.classList.add('hidden');
+        } else {
+          // Lớp trưởng, lớp phó, tổ trưởng: ẨN TAB TIN NHẮN
+          btnTabTinnhan.classList.add('hidden');
           btnTabCauhinh.classList.add('hidden');
           btnEditTkb.classList.add('hidden');
-          btnOpenRecord.classList.remove('hidden');
-          btnAddBaobaiTab.classList.add('hidden');
-          filterGroupSelect.value = off.group;
-          filterGroupSelect.disabled = true;
+          
+          if (off.role === 'loptruong' || off.role === 'loppho') {
+            btnOpenRecord.classList.remove('hidden');
+            filterGroupSelect.disabled = false;
+          } else if (off.role === 'totruong') {
+            btnOpenRecord.classList.remove('hidden');
+            filterGroupSelect.value = off.group;
+            filterGroupSelect.disabled = true;
+          }
         }
 
         switchTab('tab-nendep');
       } else {
-        // PHỤ HUYNH
         const st = currentUser.student;
         nameDisplay.textContent = "Phụ huynh em: " + st.name;
         roleDisplay.textContent = "Học sinh lớp 7A3 - " + st.group;
         iconDisplay.className = "fa-solid fa-user-graduate text-indigo-600";
 
-        document.getElementById('phChildFullName').textContent = `Em: ${st.name} (${st.group})`;
-
         btnTabPhuhuynh.classList.remove('hidden');
-        btnTabTinnhan.classList.remove('hidden');
-        
         btnTabBaobai.classList.add('hidden');
-        btnTabHopthuGvcn.classList.add('hidden');
+
+        btnTabTinnhan.classList.remove('hidden');
+        tabTinNhanLabel.textContent = "Nhắn tin GVCN";
+        document.getElementById('parentChatView').classList.remove('hidden');
+        document.getElementById('teacherChatView').classList.add('hidden');
+
+        document.getElementById('phChildFullName').textContent = `Em: ${st.name} (${st.group})`;
         btnTabCauhinh.classList.add('hidden');
         btnEditTkb.classList.add('hidden');
         btnOpenRecord.classList.add('hidden');
-        btnAddBaobaiTab.classList.add('hidden');
-
         filterGroupSelect.value = "all";
         filterGroupSelect.disabled = false;
 
@@ -1141,7 +1196,7 @@
 
       renderScoreboard();
       renderBaobaiHome();
-      renderFullBaobaiTab();
+      renderBaobaiOfficerTab();
       renderTkb();
       renderMessages();
 
@@ -1179,15 +1234,15 @@
         renderPhOverview();
       }
       if (tabId === 'tab-baobai') {
-        renderFullBaobaiTab();
+        renderBaobaiOfficerTab();
       }
-      if (tabId === 'tab-tinnhan' || tabId === 'tab-hopthugvcn') {
+      if (tabId === 'tab-tinnhan') {
         renderMessages();
       }
     }
 
     // ==========================================
-    // RENDER THẺ TỔNG QUAN PHỤ HUYNH
+    // RENDER THẺ TỔNG QUAN CON (CHO PHỤ HUYNH)
     // ==========================================
     function renderPhOverview() {
       if (!currentUser || currentUser.type !== 'ph') return;
@@ -1211,7 +1266,7 @@
         if (allComputed[i].id === st.id) break;
       }
 
-      document.getElementById('phCardRank').textContent = `Top ${rank} / 47`;
+      document.getElementById('phCardRank').textContent = `Top ${rank} / ${students.length}`;
       document.getElementById('phCardScore').textContent = `${finalScore}đ`;
       document.getElementById('phCardPlus').textContent = `+${plusTotal}`;
       document.getElementById('phCardMinus').textContent = `-${minusTotal}`;
@@ -1271,18 +1326,18 @@
       });
     }
 
-    function renderFullBaobaiTab() {
+    function renderBaobaiOfficerTab() {
       cleanExpiredBaobai();
-      const container = document.getElementById('fullBaobaiContainer');
+      const container = document.getElementById('officerBaobaiContainer');
       container.innerHTML = '';
 
       if (baobaiList.length === 0) {
-        container.innerHTML = '<div class="col-span-full p-8 text-center text-slate-400 italic text-xs bg-white rounded-2xl border">Không có bài tập nào còn hạn.</div>';
+        container.innerHTML = '<div class="col-span-full p-8 text-center text-slate-400 bg-white rounded-xl border text-xs">Hiện tại chưa có dặn dò báo bài còn hạn. Bấm "+ Đăng báo bài" để thêm mới.</div>';
         return;
       }
 
       baobaiList.forEach((bb, idx) => {
-        const canDelete = currentUser && currentUser.type === 'officer' && (currentUser.officer.role === 'gvcn' || currentUser.officer.role === 'loptruong' || currentUser.officer.role === 'loppho');
+        const canDelete = currentUser && currentUser.type === 'officer';
         const card = document.createElement('div');
         card.className = "bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2 relative";
         card.innerHTML = `
@@ -1292,7 +1347,7 @@
           </div>
           <p class="text-xs md:text-sm text-slate-700 whitespace-pre-line leading-relaxed">${bb.content}</p>
           <div class="pt-2 border-t flex items-center justify-between text-[11px] text-slate-400">
-            <span>Người đăng: ${bb.author || 'Cán sự'}</span>
+            <span>Đăng bởi: ${bb.author || 'Cán sự'}</span>
             ${canDelete ? `<button onclick="deleteBaobai(${idx})" class="text-red-500 hover:text-red-700 font-bold"><i class="fa-solid fa-trash-can mr-1"></i>Xóa</button>` : ''}
           </div>
         `;
@@ -1301,7 +1356,7 @@
     }
 
     // ==========================================
-    // TIN NHẮN (BẢO MẬT: CHỈ PH & GVCN)
+    // NHẮN TIN VỚI GVCN (CHỈ PH VÀ GVCN)
     // ==========================================
     async function sendParentMessage(e) {
       e.preventDefault();
@@ -1453,7 +1508,7 @@
     }
 
     // ==========================================
-    // THI ĐUA NỀ NẾP CẢ LỚP (35 TUẦN)
+    // THI ĐUA NỀ NẾP (THỨ 2 ĐẾN THỨ 7)
     // ==========================================
     function renderScoreboard() {
       const groupFilter = document.getElementById('filterGroupSelect').value;
@@ -1540,7 +1595,7 @@
     }
 
     // ==========================================
-    // THỜI KHOÁ BIỂU
+    // THỜI KHOÁ BIỂU (TÁCH PHÂN MÔN)
     // ==========================================
     function setTkbSession(session) {
       activeTkbSession = session;
@@ -1730,7 +1785,6 @@
     // BÁO BÀI
     // ==========================================
     function openBaobaiModal() {
-      document.getElementById('bbSubject').value = '';
       document.getElementById('bbContent').value = '';
       document.getElementById('baobaiModal').classList.remove('hidden');
     }
@@ -1757,7 +1811,7 @@
       await saveStorage(true);
       closeBaobaiModal();
       renderBaobaiHome();
-      renderFullBaobaiTab();
+      renderBaobaiOfficerTab();
       alert("Đã đăng báo bài thành công!");
     }
 
@@ -1766,7 +1820,7 @@
         baobaiList.splice(idx, 1);
         await saveStorage(true);
         renderBaobaiHome();
-        renderFullBaobaiTab();
+        renderBaobaiOfficerTab();
       }
     }
 
@@ -1815,9 +1869,29 @@
     }
 
     // ==========================================
-    // CẤU HÌNH DÀNH RIÊNG CHO GVCN
+    // CẤU HÌNH DÀNH CHO GVCN (QUẢN LÝ HỌC SINH)
     // ==========================================
     function renderGvcnConfig() {
+      document.getElementById('totalStudentsCount').textContent = students.length;
+      const pinTable = document.getElementById('studentPinManageTable');
+      pinTable.innerHTML = '';
+      students.forEach((st, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50";
+        tr.innerHTML = `
+          <td class="p-2 text-center text-slate-400 font-medium">${idx + 1}</td>
+          <td class="p-2 text-slate-600 font-semibold">${st.group}</td>
+          <td class="p-2 text-slate-500 font-mono text-[11px]">${st.id}</td>
+          <td class="p-2 font-bold text-slate-800">${st.name}</td>
+          <td class="p-2 text-center font-mono font-bold text-indigo-700">${st.pin}</td>
+          <td class="p-2 text-right whitespace-nowrap">
+            <button onclick="resetSinglePin(${idx})" class="text-indigo-600 hover:underline font-semibold mr-2.5">Đặt 1234</button>
+            <button onclick="deleteStudent(${idx})" class="text-red-500 hover:text-red-700 font-bold hover:underline"><i class="fa-solid fa-trash-can mr-1"></i>Xoá</button>
+          </td>
+        `;
+        pinTable.appendChild(tr);
+      });
+
       const offBody = document.getElementById('officersPinTable');
       offBody.innerHTML = '';
       Object.keys(officers).forEach(key => {
@@ -1832,21 +1906,6 @@
           </td>
         `;
         offBody.appendChild(tr);
-      });
-
-      const pinTable = document.getElementById('studentPinManageTable');
-      pinTable.innerHTML = '';
-      students.forEach((st, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="p-2 text-slate-500 font-medium">${st.group}</td>
-          <td class="p-2 font-bold text-slate-800">${st.name}</td>
-          <td class="p-2 text-center font-mono font-bold text-indigo-700">${st.pin}</td>
-          <td class="p-2 text-right">
-            <button onclick="resetSinglePin(${idx})" class="text-indigo-600 hover:underline font-semibold">Đặt 1234</button>
-          </td>
-        `;
-        pinTable.appendChild(tr);
       });
 
       const minusList = document.getElementById('minusRulesList');
@@ -1880,6 +1939,49 @@
       });
     }
 
+    function openAddStudentModal() {
+      document.getElementById('newStudentName').value = '';
+      document.getElementById('newStudentPin').value = '1234';
+      document.getElementById('addStudentModal').classList.remove('hidden');
+    }
+
+    function closeAddStudentModal() {
+      document.getElementById('addStudentModal').classList.add('hidden');
+    }
+
+    async function submitAddStudent(e) {
+      e.preventDefault();
+      const name = document.getElementById('newStudentName').value.trim();
+      const group = document.getElementById('newStudentGroup').value;
+      const pin = document.getElementById('newStudentPin').value.trim() || '1234';
+
+      if (!name) return alert("Vui lòng nhập tên học sinh!");
+
+      const newId = "HS" + Date.now().toString().slice(-4);
+      const newStudent = { id: newId, name, group, pin };
+
+      students.push(newStudent);
+      await saveStorage(true);
+      closeAddStudentModal();
+      refreshStudentLoginDropdown();
+      renderGvcnConfig();
+      renderScoreboard();
+      alert(`Đã thêm học sinh "${name}" vào ${group} thành công!`);
+    }
+
+    async function deleteStudent(idx) {
+      const st = students[idx];
+      if (confirm(`Bạn có chắc chắn muốn xoá học sinh "${st.name}" (${st.group}) khỏi danh sách lớp không?\nLưu ý: Dữ liệu thi đua của học sinh này cũng sẽ bị gỡ bỏ.`)) {
+        scores = scores.filter(sc => sc.studentId !== st.id);
+        students.splice(idx, 1);
+        await saveStorage(true);
+        refreshStudentLoginDropdown();
+        renderGvcnConfig();
+        renderScoreboard();
+        alert(`Đã xoá học sinh "${st.name}" thành công!`);
+      }
+    }
+
     async function editOfficerPinPrompt(key) {
       const off = officers[key];
       const newPin = prompt(`Nhập mã PIN mới cho [${off.name}]:`, off.pin);
@@ -1907,7 +2009,7 @@
     }
 
     async function resetAllPinsToDefault() {
-      if (confirm("Đặt lại mật khẩu của TẤT CẢ 47 học sinh về 1234?")) {
+      if (confirm("Đặt lại mật khẩu của TẤT CẢ học sinh về 1234?")) {
         students.forEach(s => s.pin = "1234");
         await saveStorage(true);
         renderGvcnConfig();
